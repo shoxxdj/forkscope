@@ -1,0 +1,941 @@
+{
+  "schema_version": "1.0.0",
+  "tool": {
+    "name": "forkscope",
+    "version": "0.1.0"
+  },
+  "generated_at": "2026-11-18T10:36:31.448152291+01:00",
+  "duration_seconds": 0.31,
+  "options": {
+    "full_diff": false,
+    "branch": null,
+    "depth": null,
+    "force_snapshot": false,
+    "config_file": null
+  },
+  "fork": {
+    "path": "/tmp/forkscope-demo/acme-api-fork",
+    "mode": "git_history",
+    "is_git": true,
+    "shallow": false,
+    "head": "e45913ac5c7b326ef616279630c6c636c38a65ce",
+    "head_ref": "refs/heads/main",
+    "files": 10
+  },
+  "source": {
+    "url": "/tmp/forkscope-demo/acme-api",
+    "default_branch": "main",
+    "branches": 1,
+    "tags": 2,
+    "depth": null,
+    "preferred_branch": "main"
+  },
+  "reference": {
+    "method": "git_ancestry",
+    "certainty": "exact",
+    "commit": {
+      "hash": "58b860c7c7f766702fd19e0a8525b2692a1470d0",
+      "short": "58b860c7c7",
+      "author": "Maintainer <Maintainer@example.org>",
+      "author_date": "2026-10-24T09:36:30+00:00",
+      "committer_date": "2026-10-24T09:36:30+00:00",
+      "subject": "endpoint health"
+    },
+    "location": {
+      "pointing_refs": [
+        "tag:v1.1.0"
+      ],
+      "containing_branches": [
+        "branch:main"
+      ],
+      "describe": "v1.1.0",
+      "first_tag_containing": "v1.1.0"
+    },
+    "confidence": 100.0,
+    "confidence_level": "certain (Git ancestry)",
+    "reasons": [
+      "The fork's HEAD descends directly from source commit 58b860c7c7 (ancestry verified by Git: cryptographic commit IDs).",
+      "4 commit(s) present in the fork and absent from the source."
+    ],
+    "fork_point": {
+      "hash": "58b860c7c7f766702fd19e0a8525b2692a1470d0",
+      "short": "58b860c7c7",
+      "author": "Maintainer <Maintainer@example.org>",
+      "author_date": "2026-10-24T09:36:30+00:00",
+      "committer_date": "2026-10-24T09:36:30+00:00",
+      "subject": "endpoint health"
+    },
+    "estimated_initial_base": null,
+    "candidates": [],
+    "equivalent_commits": [],
+    "commits_scored": 0,
+    "warnings": []
+  },
+  "timeline": {
+    "divergence": {
+      "hash": "58b860c7c7f766702fd19e0a8525b2692a1470d0",
+      "short": "58b860c7c7",
+      "date": "2026-10-24T09:36:30+00:00",
+      "author_date": "2026-10-24T09:36:30+00:00",
+      "subject": "endpoint health"
+    },
+    "divergence_estimated": false,
+    "reference": {
+      "hash": "58b860c7c7f766702fd19e0a8525b2692a1470d0",
+      "short": "58b860c7c7",
+      "date": "2026-10-24T09:36:30+00:00",
+      "author_date": "2026-10-24T09:36:30+00:00",
+      "subject": "endpoint health"
+    },
+    "first_fork_commit": {
+      "hash": "53429a2c13ddf56fdc2c4faf5c3083b7367ba3df",
+      "short": "53429a2c13",
+      "date": "2026-11-05T09:36:30+00:00",
+      "author_date": "2026-11-05T09:36:30+00:00",
+      "subject": "cleanup"
+    },
+    "last_fork_commit": {
+      "hash": "e45913ac5c7b326ef616279630c6c636c38a65ce",
+      "short": "e45913ac5c",
+      "date": "2026-11-17T09:36:30+00:00",
+      "author_date": "2026-11-17T09:36:30+00:00",
+      "subject": "add rate limiting"
+    },
+    "last_disk_change": {
+      "date": "2026-11-18T10:36:31+01:00",
+      "path": "NOTES.txt",
+      "files": 6
+    },
+    "source_tip": {
+      "hash": "694d63575f02fb8d73f9febd349f9cc7678244da",
+      "short": "694d63575f",
+      "date": "2026-11-02T09:36:30+00:00",
+      "author_date": "2026-11-02T09:36:30+00:00",
+      "subject": "security: disable redirects (CVE-2099-0001), rate limiting"
+    },
+    "days_of_divergence": 25,
+    "graph": {
+      "source_branch": "main",
+      "nodes": [
+        {
+          "id": "daebd987a554dbed9d77a3f3e8b8702cb6cfb0d6",
+          "lane": "source",
+          "kind": "commit",
+          "date": "2026-10-15T09:36:30+00:00",
+          "ts": 1792056990,
+          "short": "daebd987a5",
+          "subject": "initial release",
+          "labels": [
+            "v1.0.0"
+          ],
+          "count": 1,
+          "divergence": false,
+          "reference": false,
+          "severity": null
+        },
+        {
+          "id": "58b860c7c7f766702fd19e0a8525b2692a1470d0",
+          "lane": "source",
+          "kind": "commit",
+          "date": "2026-10-24T09:36:30+00:00",
+          "ts": 1792834590,
+          "short": "58b860c7c7",
+          "subject": "endpoint health",
+          "labels": [
+            "v1.1.0"
+          ],
+          "count": 1,
+          "divergence": true,
+          "reference": true,
+          "severity": null
+        },
+        {
+          "id": "694d63575f02fb8d73f9febd349f9cc7678244da",
+          "lane": "source",
+          "kind": "commit",
+          "date": "2026-11-02T09:36:30+00:00",
+          "ts": 1793612190,
+          "short": "694d63575f",
+          "subject": "security: disable redirects (CVE-2099-0001), rate limiting",
+          "labels": [
+            "main"
+          ],
+          "count": 1,
+          "divergence": false,
+          "reference": false,
+          "severity": null
+        },
+        {
+          "id": "53429a2c13ddf56fdc2c4faf5c3083b7367ba3df",
+          "lane": "fork",
+          "kind": "commit",
+          "date": "2026-11-05T09:36:30+00:00",
+          "ts": 1793871390,
+          "short": "53429a2c13",
+          "subject": "cleanup",
+          "labels": [],
+          "count": 1,
+          "divergence": false,
+          "reference": false,
+          "severity": "high"
+        },
+        {
+          "id": "113a70cde725b0841e3a731f10b86e2dee0addf1",
+          "lane": "fork",
+          "kind": "commit",
+          "date": "2026-11-08T09:36:30+00:00",
+          "ts": 1794130590,
+          "short": "113a70cde7",
+          "subject": "corporate proxy",
+          "labels": [],
+          "count": 1,
+          "divergence": false,
+          "reference": false,
+          "severity": "critical"
+        },
+        {
+          "id": "35d0acb788a031bff3bf2c050412828cd74b5f1a",
+          "lane": "fork",
+          "kind": "commit",
+          "date": "2026-11-14T09:36:30+00:00",
+          "ts": 1794648990,
+          "short": "35d0acb788",
+          "subject": "configuration",
+          "labels": [],
+          "count": 1,
+          "divergence": false,
+          "reference": false,
+          "severity": "high"
+        },
+        {
+          "id": "e45913ac5c7b326ef616279630c6c636c38a65ce",
+          "lane": "fork",
+          "kind": "commit",
+          "date": "2026-11-17T09:36:30+00:00",
+          "ts": 1794908190,
+          "short": "e45913ac5c",
+          "subject": "add rate limiting",
+          "labels": [
+            "HEAD"
+          ],
+          "count": 1,
+          "divergence": false,
+          "reference": false,
+          "severity": null
+        },
+        {
+          "id": "worktree",
+          "lane": "fork",
+          "kind": "worktree",
+          "date": "2026-11-18T10:36:31+01:00",
+          "ts": 1794994591,
+          "short": "",
+          "subject": "2 uncommitted modified file(s)",
+          "labels": [
+            "uncommitted"
+          ],
+          "count": 2,
+          "divergence": false,
+          "reference": false,
+          "severity": null
+        }
+      ],
+      "edges": [
+        {
+          "from": "53429a2c13ddf56fdc2c4faf5c3083b7367ba3df",
+          "to": "113a70cde725b0841e3a731f10b86e2dee0addf1",
+          "kind": "lane",
+          "estimated": false
+        },
+        {
+          "from": "113a70cde725b0841e3a731f10b86e2dee0addf1",
+          "to": "35d0acb788a031bff3bf2c050412828cd74b5f1a",
+          "kind": "lane",
+          "estimated": false
+        },
+        {
+          "from": "35d0acb788a031bff3bf2c050412828cd74b5f1a",
+          "to": "e45913ac5c7b326ef616279630c6c636c38a65ce",
+          "kind": "lane",
+          "estimated": false
+        },
+        {
+          "from": "e45913ac5c7b326ef616279630c6c636c38a65ce",
+          "to": "worktree",
+          "kind": "lane",
+          "estimated": false
+        },
+        {
+          "from": "daebd987a554dbed9d77a3f3e8b8702cb6cfb0d6",
+          "to": "58b860c7c7f766702fd19e0a8525b2692a1470d0",
+          "kind": "lane",
+          "estimated": false
+        },
+        {
+          "from": "58b860c7c7f766702fd19e0a8525b2692a1470d0",
+          "to": "694d63575f02fb8d73f9febd349f9cc7678244da",
+          "kind": "lane",
+          "estimated": false
+        },
+        {
+          "from": "58b860c7c7f766702fd19e0a8525b2692a1470d0",
+          "to": "53429a2c13ddf56fdc2c4faf5c3083b7367ba3df",
+          "kind": "branch_off",
+          "estimated": false
+        }
+      ]
+    }
+  },
+  "history": {
+    "mode": "ancestry",
+    "fork_head": "e45913ac5c7b326ef616279630c6c636c38a65ce",
+    "head_ref": "refs/heads/main",
+    "fork_commits_total": 4,
+    "fork_commits": [
+      {
+        "hash": "e45913ac5c7b326ef616279630c6c636c38a65ce",
+        "short": "e45913ac5c",
+        "parents": [
+          "35d0acb788a031bff3bf2c050412828cd74b5f1a"
+        ],
+        "author": "Contractor <Contractor@example.org>",
+        "author_date": "2026-11-17T09:36:30+00:00",
+        "committer": "Contractor <Contractor@example.org>",
+        "committer_date": "2026-11-17T09:36:30+00:00",
+        "subject": "add rate limiting",
+        "message": "add rate limiting",
+        "is_merge": false,
+        "files_changed": 1,
+        "insertions": 5,
+        "deletions": 0,
+        "files": [
+          "app/ratelimit.py"
+        ]
+      },
+      {
+        "hash": "35d0acb788a031bff3bf2c050412828cd74b5f1a",
+        "short": "35d0acb788",
+        "parents": [
+          "113a70cde725b0841e3a731f10b86e2dee0addf1"
+        ],
+        "author": "Contractor <Contractor@example.org>",
+        "author_date": "2026-11-14T09:36:30+00:00",
+        "committer": "Contractor <Contractor@example.org>",
+        "committer_date": "2026-11-14T09:36:30+00:00",
+        "subject": "configuration",
+        "message": "configuration",
+        "is_merge": false,
+        "files_changed": 1,
+        "insertions": 3,
+        "deletions": 0,
+        "files": [
+          "app/settings.py"
+        ],
+        "suspicious": [
+          {
+            "category": "secrets",
+            "severity": "high",
+            "detail": "AWS access key ID (app/settings.py:2)"
+          },
+          {
+            "category": "secrets",
+            "severity": "high",
+            "detail": "Credentials in a URL (app/settings.py:3)"
+          },
+          {
+            "category": "configuration",
+            "severity": "medium",
+            "detail": "Service exposure or debug mode (app/settings.py:1) [CONF-003]"
+          },
+          {
+            "category": "configuration",
+            "severity": "low",
+            "detail": "Sensitive configuration file modified (app/settings.py) [CONF-009]"
+          }
+        ],
+        "max_severity": "high"
+      },
+      {
+        "hash": "113a70cde725b0841e3a731f10b86e2dee0addf1",
+        "short": "113a70cde7",
+        "parents": [
+          "53429a2c13ddf56fdc2c4faf5c3083b7367ba3df"
+        ],
+        "author": "Contractor <Contractor@example.org>",
+        "author_date": "2026-11-08T09:36:30+00:00",
+        "committer": "Contractor <Contractor@example.org>",
+        "committer_date": "2026-11-08T09:36:30+00:00",
+        "subject": "corporate proxy",
+        "message": "corporate proxy",
+        "is_merge": false,
+        "files_changed": 2,
+        "insertions": 3,
+        "deletions": 1,
+        "files": [
+          "app/client.py",
+          "requirements.txt"
+        ],
+        "suspicious": [
+          {
+            "category": "cryptography",
+            "severity": "critical",
+            "detail": "TLS / certificate validation disabled (app/client.py:5) [CRYPTO-001]"
+          },
+          {
+            "category": "dependencies",
+            "severity": "medium",
+            "detail": "Package source modified (requirements.txt:4) [CONF-012]"
+          },
+          {
+            "category": "input_validation",
+            "severity": "low",
+            "detail": "Request to a controllable URL (potential SSRF) (app/client.py:5) [INPUT-010]"
+          },
+          {
+            "category": "dependencies",
+            "severity": "low",
+            "detail": "dependency files modified: requirements.txt"
+          }
+        ],
+        "max_severity": "critical"
+      },
+      {
+        "hash": "53429a2c13ddf56fdc2c4faf5c3083b7367ba3df",
+        "short": "53429a2c13",
+        "parents": [
+          "58b860c7c7f766702fd19e0a8525b2692a1470d0"
+        ],
+        "author": "Contractor <Contractor@example.org>",
+        "author_date": "2026-11-05T09:36:30+00:00",
+        "committer": "Contractor <Contractor@example.org>",
+        "committer_date": "2026-11-05T09:36:30+00:00",
+        "subject": "cleanup",
+        "message": "cleanup",
+        "is_merge": false,
+        "files_changed": 1,
+        "insertions": 0,
+        "deletions": 2,
+        "files": [
+          "app/admin.py"
+        ],
+        "suspicious": [
+          {
+            "category": "authorization",
+            "severity": "high",
+            "detail": "Role / permission check removed or modified (app/admin.py) [AUTHZ-001]"
+          },
+          {
+            "category": "authorization",
+            "severity": "medium",
+            "detail": "Access-denied response removed (app/admin.py) [AUTHZ-004]"
+          },
+          {
+            "category": "other",
+            "severity": "medium",
+            "detail": "innocuous commit message (\"cleanup\") for a sensitive change: commit messages are not reliable"
+          }
+        ],
+        "max_severity": "high"
+      }
+    ],
+    "truncated": false,
+    "merge_commits": 0,
+    "source_merges": [],
+    "source_commits_in_fork": 2,
+    "source_integrated_since_fork": 0,
+    "source_integrated_sample": [],
+    "behind": [
+      {
+        "branch": "main",
+        "commits_behind": 1
+      }
+    ],
+    "source_security_hints": [
+      {
+        "hash": "694d63575f02fb8d73f9febd349f9cc7678244da",
+        "date": "2026-11-02T09:36:30+00:00",
+        "subject": "security: disable redirects (CVE-2099-0001), rate limiting"
+      }
+    ],
+    "patch_matches": [],
+    "rebase_indicators": [],
+    "branches": [
+      {
+        "name": "main",
+        "commit": "e45913ac5c7b326ef616279630c6c636c38a65ce",
+        "is_head": true,
+        "commits_not_in_source": 4,
+        "commits_not_in_head": 0,
+        "divergent": false
+      }
+    ],
+    "tags": [
+      {
+        "name": "v1.0.0",
+        "commit": "daebd987a554dbed9d77a3f3e8b8702cb6cfb0d6",
+        "matches_source": true
+      },
+      {
+        "name": "v1.1.0",
+        "commit": "58b860c7c7f766702fd19e0a8525b2692a1470d0",
+        "matches_source": true
+      }
+    ],
+    "remotes": [
+      {
+        "name": "origin",
+        "url": "/tmp/forkscope-demo/acme-api"
+      }
+    ],
+    "stash_entries": 0,
+    "working_tree": {
+      "available": true,
+      "staged": [],
+      "unstaged": [
+        {
+          "path": "app/auth.py",
+          "change": "modified"
+        }
+      ],
+      "untracked": [
+        "NOTES.txt"
+      ],
+      "ignored": []
+    },
+    "warnings": []
+  },
+  "diff": {
+    "stats": {
+      "files_reference": 7,
+      "files_client": 10,
+      "identical": 3,
+      "added": 3,
+      "deleted": 0,
+      "modified": 4,
+      "renamed": 0,
+      "moved": 0,
+      "binary_changed": 0,
+      "eol_only": 0,
+      "lines_added": 13,
+      "lines_removed": 4,
+      "by_origin": {
+        "fork": 4,
+        "uncommitted": 2,
+        "source_newer": 1
+      },
+      "fork_changes": 6
+    },
+    "files": [
+      {
+        "path": "NOTES.txt",
+        "status": "added",
+        "is_binary": false,
+        "mode_changed": false,
+        "new_size": 17,
+        "new_sha256": "90ea0c6d1cd4ee5e5dc788ef4214bffb04cc9d5a74a46afd4a20cbbd8a595748",
+        "lines_added": 1,
+        "lines_removed": 0,
+        "eol_only": false,
+        "too_large": false,
+        "untracked": true,
+        "origin": "uncommitted",
+        "origin_detail": "file not tracked by Git",
+        "diff_file": "diffs/NOTES.txt.diff"
+      },
+      {
+        "path": "app/admin.py",
+        "status": "modified",
+        "is_binary": false,
+        "mode_changed": false,
+        "old_size": 154,
+        "new_size": 93,
+        "old_sha256": "2244774a2b25c89f60f8ba9c7695b55f3b6a5608e327b1b1b94d2254bf66b472",
+        "new_sha256": "c0d7a0a58dfbbe13792f1b0fdd94441e89266bc2fd6c5dcdb61cf5da9880e2bb",
+        "lines_added": 0,
+        "lines_removed": 2,
+        "similarity": 0.75,
+        "eol_only": false,
+        "too_large": false,
+        "untracked": false,
+        "origin": "fork",
+        "origin_detail": "1 fork commit(s)",
+        "diff_file": "diffs/app/admin.py.diff",
+        "commits": [
+          "53429a2c13ddf56fdc2c4faf5c3083b7367ba3df"
+        ]
+      },
+      {
+        "path": "app/auth.py",
+        "status": "modified",
+        "is_binary": false,
+        "mode_changed": false,
+        "old_size": 230,
+        "new_size": 238,
+        "old_sha256": "5aff4c1cdb73cb0442e84c16c7245ed97f8b75d43013fffd9c9eee9fb9f1e504",
+        "new_sha256": "5b29e185a442235152816ab1e8fe586851610d8d874144ddb58a55b255a57872",
+        "lines_added": 1,
+        "lines_removed": 1,
+        "similarity": 0.9090909361839294,
+        "eol_only": false,
+        "too_large": false,
+        "untracked": false,
+        "origin": "uncommitted",
+        "origin_detail": "uncommitted change",
+        "diff_file": "diffs/app/auth.py.diff"
+      },
+      {
+        "path": "app/client.py",
+        "status": "modified",
+        "is_binary": false,
+        "mode_changed": false,
+        "old_size": 80,
+        "new_size": 94,
+        "old_sha256": "1f13a9e95c287425cb08b81d4f6fd2497dd14d31719e4509aebf4ed1bd64a856",
+        "new_sha256": "8e07540fd4bb59b12f430033c03dbc14f02589d1c9f17323de661bd5e69b694b",
+        "lines_added": 1,
+        "lines_removed": 1,
+        "similarity": 0.800000011920929,
+        "eol_only": false,
+        "too_large": false,
+        "untracked": false,
+        "origin": "fork",
+        "origin_detail": "1 fork commit(s)",
+        "diff_file": "diffs/app/client.py.diff",
+        "commits": [
+          "113a70cde725b0841e3a731f10b86e2dee0addf1"
+        ]
+      },
+      {
+        "path": "app/ratelimit.py",
+        "status": "added",
+        "is_binary": false,
+        "mode_changed": false,
+        "new_size": 57,
+        "new_sha256": "3dc36a9c1bc77a3d420c52e205e17ed08203d60ce6c5ab3e548c93c02c35c833",
+        "lines_added": 5,
+        "lines_removed": 0,
+        "eol_only": false,
+        "too_large": false,
+        "untracked": false,
+        "origin": "source_newer",
+        "origin_detail": "content identical to the source version of commit 694d63575f (newer than the reference or another branch)",
+        "source_commit": "694d63575f02fb8d73f9febd349f9cc7678244da",
+        "diff_file": "diffs/app/ratelimit.py.diff",
+        "commits": [
+          "e45913ac5c7b326ef616279630c6c636c38a65ce"
+        ]
+      },
+      {
+        "path": "app/settings.py",
+        "status": "added",
+        "is_binary": false,
+        "mode_changed": false,
+        "new_size": 124,
+        "new_sha256": "60bb0d7271b0f134f9d79f8d427131112eb0f86f5bd7b944e9fef00340421609",
+        "lines_added": 3,
+        "lines_removed": 0,
+        "eol_only": false,
+        "too_large": false,
+        "untracked": false,
+        "origin": "fork",
+        "origin_detail": "1 fork commit(s)",
+        "diff_file": "diffs/app/settings.py.diff",
+        "commits": [
+          "35d0acb788a031bff3bf2c050412828cd74b5f1a"
+        ]
+      },
+      {
+        "path": "requirements.txt",
+        "status": "modified",
+        "is_binary": false,
+        "mode_changed": false,
+        "old_size": 30,
+        "new_size": 115,
+        "old_sha256": "0c45c3a0f42ac8ce46226fdfd7876dee1f50487625762a8c06c4cf2d4f6215a0",
+        "new_sha256": "e75d1feaf76290302a4893b8b055bc81b27919853f2f0d7dbb4be4b3415d8c4c",
+        "lines_added": 2,
+        "lines_removed": 0,
+        "similarity": 0.6666666865348816,
+        "eol_only": false,
+        "too_large": false,
+        "untracked": false,
+        "origin": "fork",
+        "origin_detail": "1 fork commit(s)",
+        "diff_file": "diffs/requirements.txt.diff",
+        "commits": [
+          "113a70cde725b0841e3a731f10b86e2dee0addf1"
+        ]
+      }
+    ]
+  },
+  "security": {
+    "counts": {
+      "info": 1,
+      "low": 3,
+      "medium": 3,
+      "high": 2,
+      "critical": 2
+    },
+    "findings": [
+      {
+        "id": "F-0001",
+        "rule_id": "AUTH-005",
+        "title": "JWT validation disabled or weakened",
+        "category": "authentication",
+        "severity": "critical",
+        "confidence": "high",
+        "file": "app/auth.py",
+        "line": 11,
+        "change": "added",
+        "old_code": "    return jwt.decode(token, key, algorithms=[\"HS256\"])",
+        "new_code": "    return jwt.decode(token, key, algorithms=[\"HS256\", \"none\"])",
+        "justification": "JWT signature or expiry verification seems disabled.",
+        "source": "builtin"
+      },
+      {
+        "id": "F-0002",
+        "rule_id": "CRYPTO-001",
+        "title": "TLS / certificate validation disabled",
+        "category": "cryptography",
+        "severity": "critical",
+        "confidence": "high",
+        "file": "app/client.py",
+        "line": 5,
+        "change": "added",
+        "old_code": "    return requests.get(url, timeout=5).json()",
+        "new_code": "    return requests.get(url, timeout=5, verify=False).json()",
+        "justification": "TLS certificate verification seems disabled: interception (MITM) possible.",
+        "source": "builtin",
+        "commits": [
+          "113a70cde725b0841e3a731f10b86e2dee0addf1"
+        ]
+      },
+      {
+        "id": "F-0003",
+        "rule_id": "AUTHZ-001",
+        "title": "Role / permission check removed or modified",
+        "category": "authorization",
+        "severity": "high",
+        "confidence": "medium",
+        "file": "app/admin.py",
+        "old_line": 2,
+        "change": "removed",
+        "old_code": "    if not request.user.is_admin:",
+        "justification": "A role/permission-based access control was removed or modified.",
+        "source": "builtin",
+        "commits": [
+          "53429a2c13ddf56fdc2c4faf5c3083b7367ba3df"
+        ]
+      },
+      {
+        "id": "F-0004",
+        "rule_id": "DEP",
+        "title": "Package source added/modified",
+        "category": "dependencies",
+        "severity": "high",
+        "confidence": "medium",
+        "file": "requirements.txt",
+        "change": "added",
+        "new_code": "option:--extra-index-url https://pypi.acme-mirror.example/simple (https://pypi.acme-mirror.example/simple)",
+        "justification": "A dependency download source was added or modified: risk of dependency confusion or malicious registry.",
+        "source": "dependencies",
+        "commits": [
+          "113a70cde725b0841e3a731f10b86e2dee0addf1"
+        ]
+      },
+      {
+        "id": "F-0005",
+        "rule_id": "AUTH-006",
+        "title": "JWT verification removed or modified",
+        "category": "authentication",
+        "severity": "medium",
+        "confidence": "medium",
+        "file": "app/auth.py",
+        "line": 11,
+        "old_line": 11,
+        "change": "modified",
+        "old_code": "    return jwt.decode(token, key, algorithms=[\"HS256\"])",
+        "new_code": "    return jwt.decode(token, key, algorithms=[\"HS256\", \"none\"])",
+        "justification": "The token validation mechanism was modified: check signature, algorithm, audience and expiry. The condition was modified while keeping the control element: check that it has not become less restrictive.",
+        "source": "builtin"
+      },
+      {
+        "id": "F-0006",
+        "rule_id": "CONF-003",
+        "title": "Service exposure or debug mode",
+        "category": "configuration",
+        "severity": "medium",
+        "confidence": "medium",
+        "file": "app/settings.py",
+        "line": 1,
+        "change": "added",
+        "new_code": "DEBUG = True",
+        "justification": "A service is exposed on all interfaces or a debug mode is enabled.",
+        "source": "builtin",
+        "commits": [
+          "35d0acb788a031bff3bf2c050412828cd74b5f1a"
+        ]
+      },
+      {
+        "id": "F-0007",
+        "rule_id": "AUTHZ-004",
+        "title": "Access-denied response removed",
+        "category": "authorization",
+        "severity": "medium",
+        "confidence": "low",
+        "file": "app/admin.py",
+        "old_line": 3,
+        "change": "removed",
+        "old_code": "        return forbidden()",
+        "justification": "A branch returning an access-denied error was removed.",
+        "source": "builtin",
+        "commits": [
+          "53429a2c13ddf56fdc2c4faf5c3083b7367ba3df"
+        ]
+      },
+      {
+        "id": "F-0008",
+        "rule_id": "DEP",
+        "title": "Dependency added",
+        "category": "dependencies",
+        "severity": "low",
+        "confidence": "high",
+        "file": "requirements.txt",
+        "change": "added",
+        "new_code": "acme-internal-utils ==0.1.0",
+        "justification": "New dependency `acme-internal-utils`: check its legitimacy (typosquatting, maintenance, vulnerabilities).",
+        "source": "dependencies",
+        "commits": [
+          "113a70cde725b0841e3a731f10b86e2dee0addf1"
+        ]
+      },
+      {
+        "id": "F-0009",
+        "rule_id": "CONF-009",
+        "title": "Sensitive configuration file modified",
+        "category": "configuration",
+        "severity": "low",
+        "confidence": "medium",
+        "file": "app/settings.py",
+        "change": "file",
+        "justification": "A configuration file with security impact was modified. — file added (+3 / -0 lines)",
+        "source": "builtin",
+        "commits": [
+          "35d0acb788a031bff3bf2c050412828cd74b5f1a"
+        ]
+      },
+      {
+        "id": "F-0010",
+        "rule_id": "INPUT-010",
+        "title": "Request to a controllable URL (potential SSRF)",
+        "category": "input_validation",
+        "severity": "low",
+        "confidence": "low",
+        "file": "app/client.py",
+        "line": 5,
+        "change": "added",
+        "old_code": "    return requests.get(url, timeout=5).json()",
+        "new_code": "    return requests.get(url, timeout=5, verify=False).json()",
+        "justification": "An outgoing request uses a dynamic URL: check that it is not user-controlled.",
+        "source": "builtin",
+        "commits": [
+          "113a70cde725b0841e3a731f10b86e2dee0addf1"
+        ]
+      },
+      {
+        "id": "F-0011",
+        "rule_id": "FILE-002",
+        "title": "Security-related file modified",
+        "category": "other",
+        "severity": "info",
+        "confidence": "low",
+        "file": "app/auth.py",
+        "change": "file",
+        "justification": "The file name suggests a security mechanism: review recommended (weak hint based on the name). — file modified (+1 / -1 lines)",
+        "source": "builtin"
+      }
+    ]
+  },
+  "dependencies": {
+    "manifests": [
+      {
+        "path": "requirements.txt",
+        "ecosystem": "Python",
+        "format": "requirements",
+        "lockfile": false,
+        "status": "modified",
+        "changes": [
+          {
+            "name": "acme-internal-utils",
+            "scope": "dependencies",
+            "kind": "added",
+            "old_version": null,
+            "new_version": "==0.1.0",
+            "old_source": null,
+            "new_source": null,
+            "external": false
+          },
+          {
+            "name": "option:--extra-index-url",
+            "scope": "pip-option",
+            "kind": "added",
+            "old_version": null,
+            "new_version": null,
+            "old_source": null,
+            "new_source": "https://pypi.acme-mirror.example/simple",
+            "external": true
+          }
+        ]
+      }
+    ],
+    "added": 2,
+    "removed": 0,
+    "version_changed": 0,
+    "source_changed": 0,
+    "external": 1
+  },
+  "secrets": [
+    {
+      "id": "S-0001",
+      "detector": "aws-access-key",
+      "description": "AWS access key ID",
+      "severity": "high",
+      "confidence": "high",
+      "file": "app/settings.py",
+      "line": 2,
+      "masked_value": "AKIA********** (20 car.)",
+      "context": "AWS_ACCESS_KEY_ID = \"AKIA********** (20 car.)\"",
+      "in_test_or_example": false,
+      "commits": [
+        "35d0acb788a031bff3bf2c050412828cd74b5f1a"
+      ]
+    },
+    {
+      "id": "S-0002",
+      "detector": "url-credentials",
+      "description": "Credentials in a URL",
+      "severity": "high",
+      "confidence": "high",
+      "file": "app/settings.py",
+      "line": 3,
+      "masked_value": "Sup3********** (11 car.)",
+      "context": "DATABASE_URL = \"postgres://admin:Sup3********** (11 car.)@db.internal:5432/acme\"",
+      "in_test_or_example": false,
+      "commits": [
+        "35d0acb788a031bff3bf2c050412828cd74b5f1a"
+      ]
+    }
+  ],
+  "recommendations": [
+    "Review first the 2 critical and 2 high finding(s) in the \"Sensitive changes\" section: they are leads, to be confirmed by reading the code.",
+    "2 potential secret(s) introduced: check their validity, revoke/rotate them if needed, and check the Git history (a deleted secret remains in the commits).",
+    "1 external dependency(ies) (Git/URL/path) and 0 source change(s): check the origin and integrity of these packages.",
+    "2 dependency(ies) added: check their legitimacy (typosquatting, dependency confusion) and their known vulnerabilities with a dedicated tool (cargo audit, npm audit, pip-audit…).",
+    "The working tree contains uncommitted changes (0 staged, 1 unstaged) and 1 untracked file(s): these are not in the fork's history.",
+    "1 source commit(s) newer than the reference mention security in their message: check whether these fixes are missing from the fork (hint based on messages, not reliable).",
+    "The fork is 1 commit(s) behind source branch \"main\".",
+    "3 fork commit(s) contain high or critical severity changes: review them commit by commit.",
+    "1 file(s) differing from the reference actually come from the source (backport, cherry-pick): the review effort can focus on the 6 file(s) attributed to the fork."
+  ],
+  "warnings": []
+}

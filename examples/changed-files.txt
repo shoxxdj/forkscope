@@ -1,0 +1,14 @@
+# ForkScope — files differing from source reference 58b860c7c7 (7 files, 6 attributed to the fork)
+# Status: A added, D deleted, M modified, R renamed, V moved
+# Columns: status, path [<- former path], origin
+
+## Changes attributed to the fork
+A  NOTES.txt         fork (uncommitted)
+M  app/admin.py      fork
+M  app/auth.py       fork (uncommitted)
+M  app/client.py     fork
+A  app/settings.py   fork
+M  requirements.txt  fork
+
+## Content coming from the source (outside the reference)
+A  app/ratelimit.py  source (newer version)

@@ -1,0 +1,8 @@
+status,path,former_path,origin,origin_detail,source_commit,lines_added,lines_removed,similarity,binary,untracked,fork_commits,sha256_before,sha256_after
+added,NOTES.txt,,fork (uncommitted),file not tracked by Git,,1,0,,false,true,,,90ea0c6d1cd4ee5e5dc788ef4214bffb04cc9d5a74a46afd4a20cbbd8a595748
+modified,app/admin.py,,fork,1 fork commit(s),,0,2,0.750,false,false,53429a2c13ddf56fdc2c4faf5c3083b7367ba3df,2244774a2b25c89f60f8ba9c7695b55f3b6a5608e327b1b1b94d2254bf66b472,c0d7a0a58dfbbe13792f1b0fdd94441e89266bc2fd6c5dcdb61cf5da9880e2bb
+modified,app/auth.py,,fork (uncommitted),uncommitted change,,1,1,0.909,false,false,,5aff4c1cdb73cb0442e84c16c7245ed97f8b75d43013fffd9c9eee9fb9f1e504,5b29e185a442235152816ab1e8fe586851610d8d874144ddb58a55b255a57872
+modified,app/client.py,,fork,1 fork commit(s),,1,1,0.800,false,false,113a70cde725b0841e3a731f10b86e2dee0addf1,1f13a9e95c287425cb08b81d4f6fd2497dd14d31719e4509aebf4ed1bd64a856,8e07540fd4bb59b12f430033c03dbc14f02589d1c9f17323de661bd5e69b694b
+added,app/ratelimit.py,,source (newer version),content identical to the source version of commit 694d63575f (newer than the reference or another branch),694d63575f02fb8d73f9febd349f9cc7678244da,5,0,,false,false,e45913ac5c7b326ef616279630c6c636c38a65ce,,3dc36a9c1bc77a3d420c52e205e17ed08203d60ce6c5ab3e548c93c02c35c833
+added,app/settings.py,,fork,1 fork commit(s),,3,0,,false,false,35d0acb788a031bff3bf2c050412828cd74b5f1a,,60bb0d7271b0f134f9d79f8d427131112eb0f86f5bd7b944e9fef00340421609
+modified,requirements.txt,,fork,1 fork commit(s),,2,0,0.667,false,false,113a70cde725b0841e3a731f10b86e2dee0addf1,0c45c3a0f42ac8ce46226fdfd7876dee1f50487625762a8c06c4cf2d4f6215a0,e75d1feaf76290302a4893b8b055bc81b27919853f2f0d7dbb4be4b3415d8c4c

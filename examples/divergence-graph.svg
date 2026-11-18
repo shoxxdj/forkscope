@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="370" viewBox="0 0 720 370" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif" font-size="11">
+<rect width="100%" height="100%" fill="white"/>
+<text x="16" y="24" font-size="15" font-weight="600" fill="#24292f">Divergence between the source (main) and the fork</text>
+<text x="16" y="44" fill="#6e7781">divergence: 2026-10-24   ·   fork commits: 2026-11-05 → 2026-11-17   ·   last change on disk: 2026-11-18</text>
+<text x="16" y="154" font-weight="600" fill="#0969da">source</text><text x="16" y="168" fill="#6e7781">main</text>
+<text x="16" y="234" font-weight="600" fill="#1a7f37">fork</text>
+<line x1="270.0" y1="230.0" x2="310.0" y2="230.0" stroke="#1a7f37" stroke-width="3"/>
+<line x1="310.0" y1="230.0" x2="350.0" y2="230.0" stroke="#1a7f37" stroke-width="3"/>
+<line x1="350.0" y1="230.0" x2="390.0" y2="230.0" stroke="#1a7f37" stroke-width="3"/>
+<line x1="390.0" y1="230.0" x2="430.0" y2="230.0" stroke="#1a7f37" stroke-width="3" stroke-dasharray="4 3"/>
+<line x1="150.0" y1="150.0" x2="190.0" y2="150.0" stroke="#0969da" stroke-width="3"/>
+<line x1="190.0" y1="150.0" x2="230.0" y2="150.0" stroke="#0969da" stroke-width="3"/>
+<path d="M 190.0 150.0 C 190.0 230.0, 190.0 230.0, 222.0 230.0 L 270.0 230.0" fill="none" stroke="#1a7f37" stroke-width="2.5"/>
+<g><title>[source] daebd987a5
+2026-10-15T09:36:30+00:00
+initial release</title><circle cx="150.0" cy="150.0" r="6" fill="#0969da" stroke="white" stroke-width="1.5"/></g>
+<text transform="translate(152.0,134.0) rotate(-25)" fill="#24292f" font-weight="400">v1.0.0</text>
+<text transform="translate(147.0,292.0) rotate(45)" font-size="9.5" fill="#6e7781">2026-10-15</text>
+<g><title>[source] 58b860c7c7
+2026-10-24T09:36:30+00:00
+endpoint health</title><circle cx="190.0" cy="150.0" r="6" fill="#0969da" stroke="white" stroke-width="1.5"/><circle cx="190.0" cy="150.0" r="11" fill="none" stroke="#bf8700" stroke-width="2.5"/></g>
+<text transform="translate(192.0,134.0) rotate(-25)" fill="#bf8700" font-weight="600">divergence, v1.1.0</text>
+<text transform="translate(187.0,292.0) rotate(45)" font-size="9.5" fill="#6e7781">2026-10-24</text>
+<g><title>[source] 694d63575f
+2026-11-02T09:36:30+00:00
+security: disable redirects (CVE-2099-0001), rate limiting</title><circle cx="230.0" cy="150.0" r="6" fill="#0969da" stroke="white" stroke-width="1.5"/></g>
+<text transform="translate(232.0,134.0) rotate(-25)" fill="#24292f" font-weight="400">main</text>
+<text transform="translate(227.0,292.0) rotate(45)" font-size="9.5" fill="#6e7781">2026-11-02</text>
+<g><title>[fork] 53429a2c13
+2026-11-05T09:36:30+00:00
+cleanup</title><circle cx="270.0" cy="230.0" r="6" fill="#1a7f37" stroke="white" stroke-width="1.5"/><circle cx="270.0" cy="230.0" r="10" fill="none" stroke="#cf222e" stroke-width="2"/><text x="278.0" y="222.0" font-weight="700" fill="#cf222e">!</text></g>
+<text transform="translate(267.0,292.0) rotate(45)" font-size="9.5" fill="#6e7781">2026-11-05</text>
+<g><title>[fork] 113a70cde7
+2026-11-08T09:36:30+00:00
+corporate proxy</title><circle cx="310.0" cy="230.0" r="6" fill="#1a7f37" stroke="white" stroke-width="1.5"/><circle cx="310.0" cy="230.0" r="10" fill="none" stroke="#cf222e" stroke-width="2"/><text x="318.0" y="222.0" font-weight="700" fill="#cf222e">!</text></g>
+<text transform="translate(307.0,292.0) rotate(45)" font-size="9.5" fill="#6e7781">2026-11-08</text>
+<g><title>[fork] 35d0acb788
+2026-11-14T09:36:30+00:00
+configuration</title><circle cx="350.0" cy="230.0" r="6" fill="#1a7f37" stroke="white" stroke-width="1.5"/><circle cx="350.0" cy="230.0" r="10" fill="none" stroke="#cf222e" stroke-width="2"/><text x="358.0" y="222.0" font-weight="700" fill="#cf222e">!</text></g>
+<text transform="translate(347.0,292.0) rotate(45)" font-size="9.5" fill="#6e7781">2026-11-14</text>
+<g><title>[fork] e45913ac5c
+2026-11-17T09:36:30+00:00
+add rate limiting</title><circle cx="390.0" cy="230.0" r="6" fill="#1a7f37" stroke="white" stroke-width="1.5"/></g>
+<text transform="translate(394.0,246.0) rotate(35)" fill="#1a7f37" font-weight="600">HEAD</text>
+<text transform="translate(387.0,292.0) rotate(45)" font-size="9.5" fill="#6e7781">2026-11-17</text>
+<g><title>[fork] 
+2026-11-18T10:36:31+01:00
+2 uncommitted modified file(s)</title><circle cx="430.0" cy="230.0" r="7" fill="white" stroke="#1a7f37" stroke-width="2.5" stroke-dasharray="3 2"/></g>
+<text transform="translate(434.0,246.0) rotate(35)" fill="#1a7f37" font-weight="600">uncommitted</text>
+<text transform="translate(427.0,292.0) rotate(45)" font-size="9.5" fill="#6e7781">2026-11-18</text>
+<g transform="translate(22.0,352.0)"><circle cx="0" cy="-4" r="5" fill="#0969da"/><text x="12" y="0" fill="#6e7781">source commit</text></g>
+<g transform="translate(126.6,352.0)"><circle cx="0" cy="-4" r="5" fill="#1a7f37"/><text x="12" y="0" fill="#6e7781">fork commit</text></g>
+<g transform="translate(218.8,352.0)"><circle cx="0" cy="-4" r="5" fill="white" stroke="#6e7781" stroke-width="2.5"/><text x="12" y="0" fill="#6e7781">merge</text></g>
+<g transform="translate(273.8,352.0)"><circle cx="0" cy="-4" r="7" fill="none" stroke="#bf8700" stroke-width="2.5"/><text x="12" y="0" fill="#6e7781">divergence</text></g>
+<g transform="translate(359.8,352.0)"><circle cx="0" cy="-4" r="7" fill="none" stroke="#cf222e" stroke-width="2"/><text x="12" y="0" fill="#6e7781">high/critical finding</text></g>
+<g transform="translate(514.0,352.0)"><circle cx="0" cy="-4" r="5" fill="white" stroke="#1a7f37" stroke-width="2" stroke-dasharray="3 2"/><text x="12" y="0" fill="#6e7781">uncommitted / estimated</text></g>
+</svg>

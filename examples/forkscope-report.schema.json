@@ -1,0 +1,2181 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ForkScopeReport",
+  "description": "Full ForkScope report.",
+  "type": "object",
+  "required": [
+    "dependencies",
+    "diff",
+    "duration_seconds",
+    "fork",
+    "generated_at",
+    "options",
+    "recommendations",
+    "reference",
+    "schema_version",
+    "secrets",
+    "security",
+    "source",
+    "timeline",
+    "tool",
+    "warnings"
+  ],
+  "properties": {
+    "dependencies": {
+      "$ref": "#/definitions/DependencyReport"
+    },
+    "diff": {
+      "$ref": "#/definitions/DiffSection"
+    },
+    "duration_seconds": {
+      "type": "number",
+      "format": "double"
+    },
+    "fork": {
+      "description": "Analysed fork repository.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientInfo"
+        }
+      ]
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "history": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/HistoryAnalysis"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "options": {
+      "$ref": "#/definitions/ReportOptions"
+    },
+    "recommendations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reference": {
+      "$ref": "#/definitions/ReferenceResult"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "secrets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/SecretFinding"
+      }
+    },
+    "security": {
+      "$ref": "#/definitions/SecuritySection"
+    },
+    "source": {
+      "description": "Source (original) repository.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpstreamInfo"
+        }
+      ]
+    },
+    "timeline": {
+      "description": "Key dates and divergence graph.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Timeline"
+        }
+      ]
+    },
+    "tool": {
+      "$ref": "#/definitions/ToolInfo"
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "definitions": {
+    "BehindInfo": {
+      "description": "How far the fork is behind a source branch.",
+      "type": "object",
+      "required": [
+        "branch",
+        "commits_behind"
+      ],
+      "properties": {
+        "branch": {
+          "type": "string"
+        },
+        "commits_behind": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        }
+      }
+    },
+    "BranchInfo": {
+      "description": "Local branch of the fork.",
+      "type": "object",
+      "required": [
+        "commit",
+        "commits_not_in_head",
+        "commits_not_in_source",
+        "divergent",
+        "is_head",
+        "name"
+      ],
+      "properties": {
+        "commit": {
+          "type": "string"
+        },
+        "commits_not_in_head": {
+          "description": "Commits missing from the fork's HEAD.",
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "commits_not_in_source": {
+          "description": "Commits missing from the source.",
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "divergent": {
+          "description": "Divergent branch: contains specific work not integrated into HEAD.",
+          "type": "boolean"
+        },
+        "is_head": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "Candidate": {
+      "description": "Score of a candidate commit (estimation).",
+      "type": "object",
+      "required": [
+        "added",
+        "commit",
+        "deleted",
+        "identical",
+        "manifests_identical",
+        "manifests_total",
+        "modified",
+        "moved",
+        "refs",
+        "score"
+      ],
+      "properties": {
+        "added": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "commit": {
+          "type": "string"
+        },
+        "content_similarity": {
+          "description": "Average similarity of the modified files (fine phase).",
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "deleted": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "identical": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "manifests_identical": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "manifests_total": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "modified": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "moved": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "score": {
+          "type": "number",
+          "format": "double"
+        },
+        "structure_similarity": {
+          "description": "Structure similarity (directories).",
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        }
+      }
+    },
+    "Category": {
+      "description": "Finding category.",
+      "type": "string",
+      "enum": [
+        "authentication",
+        "authorization",
+        "cryptography",
+        "input_validation",
+        "configuration",
+        "dependencies",
+        "secrets",
+        "other"
+      ]
+    },
+    "Certainty": {
+      "description": "Certainty level.",
+      "oneOf": [
+        {
+          "description": "Ancestry relation verified by Git.",
+          "type": "string",
+          "enum": [
+            "exact"
+          ]
+        },
+        {
+          "description": "Statistical estimate: never treat it as certain.",
+          "type": "string",
+          "enum": [
+            "estimated"
+          ]
+        }
+      ]
+    },
+    "ChangeOrigin": {
+      "description": "Origin of a change.",
+      "oneOf": [
+        {
+          "description": "Change written by the fork (the fork's own commits).",
+          "type": "string",
+          "enum": [
+            "fork"
+          ]
+        },
+        {
+          "description": "Change present only in the working tree (uncommitted / untracked).",
+          "type": "string",
+          "enum": [
+            "uncommitted"
+          ]
+        },
+        {
+          "description": "Content identical to a newer source version or another branch (backport).",
+          "type": "string",
+          "enum": [
+            "source_newer"
+          ]
+        },
+        {
+          "description": "Content identical to a source version older than the reference (rollback).",
+          "type": "string",
+          "enum": [
+            "source_older"
+          ]
+        },
+        {
+          "description": "Introduced by a fork commit copied from a source commit (cherry-pick).",
+          "type": "string",
+          "enum": [
+            "source_cherry_pick"
+          ]
+        },
+        {
+          "description": "Undetermined origin (e.g. merge resolution).",
+          "type": "string",
+          "enum": [
+            "undetermined"
+          ]
+        }
+      ]
+    },
+    "ChangeStatus": {
+      "description": "Status of a file relative to the reference.",
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [
+            "added",
+            "deleted",
+            "modified",
+            "identical"
+          ]
+        },
+        {
+          "description": "File name changed (possibly also moved).",
+          "type": "string",
+          "enum": [
+            "renamed"
+          ]
+        },
+        {
+          "description": "Same name, different directory.",
+          "type": "string",
+          "enum": [
+            "moved"
+          ]
+        }
+      ]
+    },
+    "ClientInfo": {
+      "type": "object",
+      "required": [
+        "files",
+        "is_git",
+        "mode",
+        "path",
+        "shallow"
+      ],
+      "properties": {
+        "files": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "head": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "head_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "is_git": {
+          "type": "boolean"
+        },
+        "mode": {
+          "$ref": "#/definitions/ClientMode"
+        },
+        "path": {
+          "type": "string"
+        },
+        "shallow": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ClientMode": {
+      "description": "Situation of the fork.",
+      "oneOf": [
+        {
+          "description": "Git history descending from the source.",
+          "type": "string",
+          "enum": [
+            "git_history"
+          ]
+        },
+        {
+          "description": "Git repository with no commit in common with the source (rewritten/imported history).",
+          "type": "string",
+          "enum": [
+            "rewritten_history"
+          ]
+        },
+        {
+          "description": "Git repository present but unreadable or empty.",
+          "type": "string",
+          "enum": [
+            "git_history_unusable"
+          ]
+        },
+        {
+          "description": "Plain source directory.",
+          "type": "string",
+          "enum": [
+            "no_git_metadata"
+          ]
+        },
+        {
+          "description": "History ignored on request (`--force-snapshot`).",
+          "type": "string",
+          "enum": [
+            "forced_snapshot"
+          ]
+        }
+      ]
+    },
+    "CommitInfo": {
+      "description": "Commit specific to the fork.",
+      "type": "object",
+      "required": [
+        "author",
+        "author_date",
+        "committer",
+        "committer_date",
+        "deletions",
+        "files",
+        "files_changed",
+        "hash",
+        "insertions",
+        "is_merge",
+        "message",
+        "parents",
+        "short",
+        "subject"
+      ],
+      "properties": {
+        "author": {
+          "type": "string"
+        },
+        "author_date": {
+          "type": "string"
+        },
+        "committer": {
+          "type": "string"
+        },
+        "committer_date": {
+          "type": "string"
+        },
+        "deletions": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "files_changed": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "hash": {
+          "type": "string"
+        },
+        "insertions": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "is_merge": {
+          "type": "boolean"
+        },
+        "max_severity": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Severity"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "message": {
+          "type": "string"
+        },
+        "parents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "short": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "suspicious": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SuspicionReason"
+          }
+        }
+      }
+    },
+    "CommitLite": {
+      "description": "Source commit (short form).",
+      "type": "object",
+      "required": [
+        "date",
+        "hash",
+        "subject"
+      ],
+      "properties": {
+        "date": {
+          "type": "string"
+        },
+        "hash": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        }
+      }
+    },
+    "CommitSummary": {
+      "description": "Commit summary.",
+      "type": "object",
+      "required": [
+        "author",
+        "author_date",
+        "committer_date",
+        "hash",
+        "short",
+        "subject"
+      ],
+      "properties": {
+        "author": {
+          "type": "string"
+        },
+        "author_date": {
+          "type": "string"
+        },
+        "committer_date": {
+          "type": "string"
+        },
+        "hash": {
+          "type": "string"
+        },
+        "short": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        }
+      }
+    },
+    "Confidence": {
+      "description": "Confidence level.",
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "DatedCommit": {
+      "description": "Dated commit.",
+      "type": "object",
+      "required": [
+        "author_date",
+        "date",
+        "hash",
+        "short",
+        "subject"
+      ],
+      "properties": {
+        "author_date": {
+          "description": "Author date (ISO 8601).",
+          "type": "string"
+        },
+        "date": {
+          "description": "Commit date (ISO 8601).",
+          "type": "string"
+        },
+        "hash": {
+          "type": "string"
+        },
+        "short": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        }
+      }
+    },
+    "DepChange": {
+      "description": "Change of a dependency.",
+      "type": "object",
+      "required": [
+        "external",
+        "kind",
+        "name",
+        "scope"
+      ],
+      "properties": {
+        "external": {
+          "description": "Git, URL or local path dependency (outside the official registry).",
+          "type": "boolean"
+        },
+        "kind": {
+          "$ref": "#/definitions/DepChangeKind"
+        },
+        "name": {
+          "type": "string"
+        },
+        "new_source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "new_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "old_source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "old_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "scope": {
+          "type": "string"
+        }
+      }
+    },
+    "DepChangeKind": {
+      "description": "Kind of dependency change.",
+      "type": "string",
+      "enum": [
+        "added",
+        "removed",
+        "version_changed",
+        "source_changed"
+      ]
+    },
+    "DepFormat": {
+      "description": "Ecosystem / format of a dependency file.",
+      "type": "string",
+      "enum": [
+        "cargo_toml",
+        "cargo_lock",
+        "package_json",
+        "package_lock",
+        "yarn_lock",
+        "pnpm_lock",
+        "requirements",
+        "pyproject",
+        "poetry_lock",
+        "composer_json",
+        "composer_lock",
+        "pom_xml",
+        "gradle",
+        "go_mod",
+        "go_sum",
+        "gemfile",
+        "gemfile_lock"
+      ]
+    },
+    "DependencyReport": {
+      "description": "Dependency summary.",
+      "type": "object",
+      "required": [
+        "added",
+        "external",
+        "manifests",
+        "removed",
+        "source_changed",
+        "version_changed"
+      ],
+      "properties": {
+        "added": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "external": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "manifests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManifestReport"
+          }
+        },
+        "removed": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "source_changed": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "version_changed": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        }
+      }
+    },
+    "DiffLine": {
+      "description": "Line of a hunk.",
+      "type": "object",
+      "required": [
+        "kind",
+        "text"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/LineKind"
+        },
+        "new_no": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "old_no": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "DiffSection": {
+      "type": "object",
+      "required": [
+        "files",
+        "stats"
+      ],
+      "properties": {
+        "files": {
+          "description": "Differing files (identical files are only counted).",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileChange"
+          }
+        },
+        "stats": {
+          "$ref": "#/definitions/DiffStats"
+        }
+      }
+    },
+    "DiffStats": {
+      "description": "Global diff statistics.",
+      "type": "object",
+      "required": [
+        "added",
+        "binary_changed",
+        "deleted",
+        "eol_only",
+        "files_client",
+        "files_reference",
+        "identical",
+        "lines_added",
+        "lines_removed",
+        "modified",
+        "moved",
+        "renamed"
+      ],
+      "properties": {
+        "added": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "binary_changed": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "by_origin": {
+          "description": "Number of differing files per origin.",
+          "default": {},
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "uint",
+            "minimum": 0.0
+          }
+        },
+        "deleted": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "eol_only": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "files_client": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "files_reference": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "fork_changes": {
+          "description": "Differing files attributable to the fork (fork, uncommitted, undetermined).",
+          "default": 0,
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "identical": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "lines_added": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "lines_removed": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "modified": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "moved": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "renamed": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        }
+      }
+    },
+    "DiskChange": {
+      "description": "Latest file modification observed on disk.",
+      "type": "object",
+      "required": [
+        "date",
+        "files",
+        "path"
+      ],
+      "properties": {
+        "date": {
+          "type": "string"
+        },
+        "files": {
+          "description": "Number of fork files (modified, not deleted) whose date was read.",
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "path": {
+          "type": "string"
+        }
+      }
+    },
+    "EdgeKind": {
+      "description": "Kind of edge.",
+      "oneOf": [
+        {
+          "description": "Continuation of a lane.",
+          "type": "string",
+          "enum": [
+            "lane"
+          ]
+        },
+        {
+          "description": "Fork departure from the source.",
+          "type": "string",
+          "enum": [
+            "branch_off"
+          ]
+        },
+        {
+          "description": "Integration (merge) of the source into the fork.",
+          "type": "string",
+          "enum": [
+            "merge"
+          ]
+        }
+      ]
+    },
+    "FileChange": {
+      "description": "Change of a file.",
+      "type": "object",
+      "required": [
+        "eol_only",
+        "is_binary",
+        "lines_added",
+        "lines_removed",
+        "mode_changed",
+        "origin",
+        "path",
+        "status",
+        "too_large",
+        "untracked"
+      ],
+      "properties": {
+        "commits": {
+          "description": "Fork commits that touched this file.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "diff_file": {
+          "description": "Relative path of the `.diff` file generated in the output directory.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "eol_only": {
+          "description": "Only line endings differ.",
+          "type": "boolean"
+        },
+        "hunks": {
+          "description": "Hunks (included in the JSON only with `--full-diff`).",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Hunk"
+          }
+        },
+        "is_binary": {
+          "type": "boolean"
+        },
+        "lines_added": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "lines_removed": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "mode_changed": {
+          "description": "Type change (executable, symbolic link…).",
+          "type": "boolean"
+        },
+        "new_sha256": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "new_size": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint64",
+          "minimum": 0.0
+        },
+        "old_path": {
+          "description": "Former path (rename / move).",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "old_sha256": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "old_size": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint64",
+          "minimum": 0.0
+        },
+        "origin": {
+          "description": "Origin of the change.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ChangeOrigin"
+            }
+          ]
+        },
+        "origin_detail": {
+          "description": "Explanation of the origin.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "path": {
+          "description": "Path in the fork (or in the reference for a deleted file).",
+          "type": "string"
+        },
+        "similarity": {
+          "description": "Content similarity (0-1) with the reference version.",
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "source_commit": {
+          "description": "Source commit the content comes from (if applicable).",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/ChangeStatus"
+        },
+        "too_large": {
+          "description": "File too large for a line diff.",
+          "type": "boolean"
+        },
+        "untracked": {
+          "description": "File not tracked by Git in the fork.",
+          "type": "boolean"
+        }
+      }
+    },
+    "Finding": {
+      "description": "Finding (a lead to investigate, not a confirmed vulnerability).",
+      "type": "object",
+      "required": [
+        "category",
+        "change",
+        "confidence",
+        "file",
+        "id",
+        "justification",
+        "rule_id",
+        "severity",
+        "source",
+        "title"
+      ],
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/Category"
+        },
+        "change": {
+          "description": "removed | added | replaced | modified | file",
+          "type": "string"
+        },
+        "commits": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "confidence": {
+          "$ref": "#/definitions/Confidence"
+        },
+        "file": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "justification": {
+          "type": "string"
+        },
+        "line": {
+          "description": "Line in the fork (or in the reference for a removal).",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "new_code": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "old_code": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "old_line": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "rule_id": {
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/definitions/Severity"
+        },
+        "source": {
+          "description": "Origin: engine that produced the finding (builtin, custom, semgrep…).",
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "Graph": {
+      "description": "Divergence graph (nodes sorted chronologically, consistent with the edges).",
+      "type": "object",
+      "required": [
+        "edges",
+        "nodes"
+      ],
+      "properties": {
+        "edges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GraphEdge"
+          }
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GraphNode"
+          }
+        },
+        "source_branch": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "GraphEdge": {
+      "type": "object",
+      "required": [
+        "estimated",
+        "from",
+        "kind",
+        "to"
+      ],
+      "properties": {
+        "estimated": {
+          "description": "Estimated relation (no common history).",
+          "type": "boolean"
+        },
+        "from": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/EdgeKind"
+        },
+        "to": {
+          "type": "string"
+        }
+      }
+    },
+    "GraphNode": {
+      "description": "Graph node.",
+      "type": "object",
+      "required": [
+        "count",
+        "date",
+        "divergence",
+        "id",
+        "kind",
+        "labels",
+        "lane",
+        "reference",
+        "short",
+        "subject",
+        "ts"
+      ],
+      "properties": {
+        "count": {
+          "description": "Number of grouped commits (Gap node).",
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "date": {
+          "type": "string"
+        },
+        "divergence": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/NodeKind"
+        },
+        "labels": {
+          "description": "Branches/tags, HEAD…",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lane": {
+          "$ref": "#/definitions/Lane"
+        },
+        "reference": {
+          "type": "boolean"
+        },
+        "severity": {
+          "description": "Highest severity of the commit's findings (fork).",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Severity"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "short": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "ts": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "HistoryAnalysis": {
+      "description": "History analysis result.",
+      "type": "object",
+      "required": [
+        "behind",
+        "branches",
+        "fork_commits",
+        "fork_commits_total",
+        "fork_head",
+        "merge_commits",
+        "mode",
+        "patch_matches",
+        "rebase_indicators",
+        "remotes",
+        "source_commits_in_fork",
+        "source_integrated_sample",
+        "source_integrated_since_fork",
+        "source_merges",
+        "source_security_hints",
+        "stash_entries",
+        "tags",
+        "truncated",
+        "warnings",
+        "working_tree"
+      ],
+      "properties": {
+        "behind": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BehindInfo"
+          }
+        },
+        "branches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BranchInfo"
+          }
+        },
+        "fork_commits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommitInfo"
+          }
+        },
+        "fork_commits_total": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "fork_head": {
+          "type": "string"
+        },
+        "head_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "merge_commits": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "mode": {
+          "$ref": "#/definitions/HistoryMode"
+        },
+        "patch_matches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PatchMatch"
+          }
+        },
+        "rebase_indicators": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "remotes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RemoteInfo"
+          }
+        },
+        "source_commits_in_fork": {
+          "description": "Source commits present in the fork's history.",
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "source_integrated_sample": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommitLite"
+          }
+        },
+        "source_integrated_since_fork": {
+          "description": "Source commits integrated after the fork's starting point.",
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "source_merges": {
+          "description": "Fork merges that integrated source commits.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_security_hints": {
+          "description": "Non-integrated source commits whose message mentions security (hint).",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommitLite"
+          }
+        },
+        "stash_entries": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagInfo"
+          }
+        },
+        "truncated": {
+          "type": "boolean"
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "working_tree": {
+          "$ref": "#/definitions/WorkingTreeStatus"
+        }
+      }
+    },
+    "HistoryMode": {
+      "description": "History analysis mode.",
+      "oneOf": [
+        {
+          "description": "The fork's history descends from the source.",
+          "type": "string",
+          "enum": [
+            "ancestry"
+          ]
+        },
+        {
+          "description": "No common commit: rewritten, squashed or imported history.",
+          "type": "string",
+          "enum": [
+            "rewritten"
+          ]
+        }
+      ]
+    },
+    "Hunk": {
+      "description": "Block of contiguous changes.",
+      "type": "object",
+      "required": [
+        "lines",
+        "new_lines",
+        "new_start",
+        "old_lines",
+        "old_start"
+      ],
+      "properties": {
+        "lines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiffLine"
+          }
+        },
+        "new_lines": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "new_start": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "old_lines": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "old_start": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        }
+      }
+    },
+    "Lane": {
+      "description": "Graph lane.",
+      "type": "string",
+      "enum": [
+        "source",
+        "fork"
+      ]
+    },
+    "LineKind": {
+      "type": "string",
+      "enum": [
+        "context",
+        "added",
+        "removed"
+      ]
+    },
+    "ManifestReport": {
+      "description": "Analysis of a modified dependency file.",
+      "type": "object",
+      "required": [
+        "changes",
+        "ecosystem",
+        "format",
+        "lockfile",
+        "path",
+        "status"
+      ],
+      "properties": {
+        "changes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DepChange"
+          }
+        },
+        "ecosystem": {
+          "type": "string"
+        },
+        "format": {
+          "$ref": "#/definitions/DepFormat"
+        },
+        "lockfile": {
+          "type": "boolean"
+        },
+        "parse_error": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "path": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/ChangeStatus"
+        }
+      }
+    },
+    "MatchKind": {
+      "description": "Kind of match between a fork commit and a source commit.",
+      "oneOf": [
+        {
+          "description": "Same change as a source commit absent from the fork's ancestry.",
+          "type": "string",
+          "enum": [
+            "cherry_pick"
+          ]
+        },
+        {
+          "description": "Same change and same author/date: source commit recreated (rebase, rewrite).",
+          "type": "string",
+          "enum": [
+            "rewritten"
+          ]
+        },
+        {
+          "description": "Same author/date as a source commit but different content: original commit modified.",
+          "type": "string",
+          "enum": [
+            "modified"
+          ]
+        },
+        {
+          "description": "The fork commit exactly reverts a source commit.",
+          "type": "string",
+          "enum": [
+            "reverted"
+          ]
+        }
+      ]
+    },
+    "NodeKind": {
+      "description": "Kind of node.",
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [
+            "commit",
+            "merge"
+          ]
+        },
+        {
+          "description": "Grouped commits (not displayed individually).",
+          "type": "string",
+          "enum": [
+            "gap"
+          ]
+        },
+        {
+          "description": "Uncommitted changes.",
+          "type": "string",
+          "enum": [
+            "worktree"
+          ]
+        },
+        {
+          "description": "Fork content without history (estimate).",
+          "type": "string",
+          "enum": [
+            "snapshot"
+          ]
+        }
+      ]
+    },
+    "PatchMatch": {
+      "description": "Detected match.",
+      "type": "object",
+      "required": [
+        "evidence",
+        "fork_commit",
+        "fork_subject",
+        "kind",
+        "source_commit",
+        "source_subject"
+      ],
+      "properties": {
+        "evidence": {
+          "type": "string"
+        },
+        "fork_commit": {
+          "type": "string"
+        },
+        "fork_subject": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/MatchKind"
+        },
+        "source_commit": {
+          "type": "string"
+        },
+        "source_subject": {
+          "type": "string"
+        }
+      }
+    },
+    "RefLocation": {
+      "description": "Position of the commit in the source (branches, tags).",
+      "type": "object",
+      "required": [
+        "containing_branches",
+        "pointing_refs"
+      ],
+      "properties": {
+        "containing_branches": {
+          "description": "Source branches containing this commit.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "describe": {
+          "description": "`git describe --tags` (closest previous tag).",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "first_tag_containing": {
+          "description": "First tag containing this commit (`git describe --contains`).",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "pointing_refs": {
+          "description": "Branches/tags pointing exactly at this commit.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ReferenceMethod": {
+      "description": "Identification method.",
+      "type": "string",
+      "enum": [
+        "git_ancestry",
+        "snapshot_estimation"
+      ]
+    },
+    "ReferenceResult": {
+      "description": "Identification result.",
+      "type": "object",
+      "required": [
+        "candidates",
+        "certainty",
+        "commit",
+        "commits_scored",
+        "confidence",
+        "confidence_level",
+        "equivalent_commits",
+        "location",
+        "method",
+        "reasons",
+        "warnings"
+      ],
+      "properties": {
+        "candidates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Candidate"
+          }
+        },
+        "certainty": {
+          "$ref": "#/definitions/Certainty"
+        },
+        "commit": {
+          "$ref": "#/definitions/CommitSummary"
+        },
+        "commits_scored": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "confidence": {
+          "description": "Confidence (0-100).",
+          "type": "number",
+          "format": "double"
+        },
+        "confidence_level": {
+          "type": "string"
+        },
+        "equivalent_commits": {
+          "description": "Other commits indistinguishable from the selected commit.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "estimated_initial_base": {
+          "description": "Estimate of the initial starting point (rewritten history: tree of the fork's first commit).",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ReferenceResult"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "fork_point": {
+          "description": "Initial starting point of the fork (first attached source commit).",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/CommitSummary"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "location": {
+          "$ref": "#/definitions/RefLocation"
+        },
+        "method": {
+          "$ref": "#/definitions/ReferenceMethod"
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RemoteInfo": {
+      "description": "Remote declared in the fork's configuration.",
+      "type": "object",
+      "required": [
+        "name",
+        "url"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "ReportOptions": {
+      "type": "object",
+      "required": [
+        "force_snapshot",
+        "full_diff"
+      ],
+      "properties": {
+        "branch": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "config_file": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "depth": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint32",
+          "minimum": 0.0
+        },
+        "force_snapshot": {
+          "type": "boolean"
+        },
+        "full_diff": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SecretFinding": {
+      "description": "Potential secret.",
+      "type": "object",
+      "required": [
+        "confidence",
+        "context",
+        "description",
+        "detector",
+        "file",
+        "id",
+        "in_test_or_example",
+        "masked_value",
+        "severity"
+      ],
+      "properties": {
+        "commits": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "confidence": {
+          "$ref": "#/definitions/Confidence"
+        },
+        "context": {
+          "description": "Context line (value masked).",
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "detector": {
+          "type": "string"
+        },
+        "file": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "in_test_or_example": {
+          "type": "boolean"
+        },
+        "line": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "masked_value": {
+          "description": "Masked value.",
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/definitions/Severity"
+        }
+      }
+    },
+    "SecuritySection": {
+      "type": "object",
+      "required": [
+        "counts",
+        "findings"
+      ],
+      "properties": {
+        "counts": {
+          "description": "Number of findings per severity.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "uint",
+            "minimum": 0.0
+          }
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Finding"
+          }
+        }
+      }
+    },
+    "Severity": {
+      "description": "Finding severity.",
+      "type": "string",
+      "enum": [
+        "info",
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ]
+    },
+    "StatusEntry": {
+      "description": "Working tree status entry.",
+      "type": "object",
+      "required": [
+        "change",
+        "path"
+      ],
+      "properties": {
+        "change": {
+          "description": "added | modified | deleted",
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        }
+      }
+    },
+    "SuspicionReason": {
+      "description": "Reason why a commit is considered suspicious.",
+      "type": "object",
+      "required": [
+        "category",
+        "detail",
+        "severity"
+      ],
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/Category"
+        },
+        "detail": {
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/definitions/Severity"
+        }
+      }
+    },
+    "TagInfo": {
+      "description": "Fork tag.",
+      "type": "object",
+      "required": [
+        "commit",
+        "matches_source",
+        "name"
+      ],
+      "properties": {
+        "commit": {
+          "type": "string"
+        },
+        "matches_source": {
+          "description": "The tag exists in the source and points to the same commit.",
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "Timeline": {
+      "description": "Fork timeline.",
+      "type": "object",
+      "required": [
+        "divergence_estimated",
+        "graph"
+      ],
+      "properties": {
+        "days_of_divergence": {
+          "description": "Days between the divergence and the fork's latest known change.",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "int64"
+        },
+        "divergence": {
+          "description": "Source commit from which the fork diverged.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DatedCommit"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "divergence_estimated": {
+          "description": "The divergence is an estimate (no common history).",
+          "type": "boolean"
+        },
+        "first_fork_commit": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DatedCommit"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "graph": {
+          "$ref": "#/definitions/Graph"
+        },
+        "last_disk_change": {
+          "description": "Latest modification of a fork file on disk (indicative).",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DiskChange"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "last_fork_commit": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DatedCommit"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reference": {
+          "description": "Most recent integrated source commit (diff reference).",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DatedCommit"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source_tip": {
+          "description": "Latest commit of the preferred source branch.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DatedCommit"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "ToolInfo": {
+      "type": "object",
+      "required": [
+        "name",
+        "version"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "UpstreamInfo": {
+      "description": "Information about the fetched source repository.",
+      "type": "object",
+      "required": [
+        "branches",
+        "tags",
+        "url"
+      ],
+      "properties": {
+        "branches": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "default_branch": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "depth": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint32",
+          "minimum": 0.0
+        },
+        "preferred_branch": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "tags": {
+          "type": "integer",
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "url": {
+          "description": "URL (credentials masked).",
+          "type": "string"
+        }
+      }
+    },
+    "WorkingTreeStatus": {
+      "description": "Uncommitted changes and untracked files.",
+      "type": "object",
+      "required": [
+        "available",
+        "ignored",
+        "staged",
+        "unstaged",
+        "untracked"
+      ],
+      "properties": {
+        "available": {
+          "type": "boolean"
+        },
+        "ignored": {
+          "description": "Untracked files ignored by `.gitignore` (present on disk).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "staged": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StatusEntry"
+          }
+        },
+        "unstaged": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StatusEntry"
+          }
+        },
+        "untracked": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

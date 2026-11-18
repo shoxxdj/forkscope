@@ -1,0 +1,47 @@
+[package]
+name = "forkscope"
+version = "0.1.0"
+edition = "2021"
+description = "Compare a fork with its source Git repository to prepare a security audit"
+repository = "https://github.com/shoxxdj/forkscope"
+keywords = ["git", "fork", "security", "audit", "diff"]
+categories = ["command-line-utilities", "development-tools"]
+license = "MIT"
+readme = "README.md"
+rust-version = "1.88"
+
+[lib]
+name = "forkscope"
+path = "src/lib.rs"
+
+[[bin]]
+name = "forkscope"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1"
+chrono = { version = "0.4", default-features = false, features = ["clock", "std"] }
+clap = { version = "4", features = ["derive"] }
+comfy-table = "7"
+console = "0.15"
+globset = "0.4"
+hex = "0.4"
+indicatif = "0.17"
+rayon = "1"
+regex = "1"
+schemars = "0.8"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_yaml = "0.9"
+sha1 = "0.10"
+sha2 = "0.10"
+similar = "2"
+tempfile = "3"
+toml = "0.8"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+walkdir = "2"
+
+[profile.release]
+lto = "thin"
+codegen-units = 4

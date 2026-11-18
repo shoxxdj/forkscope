@@ -1,0 +1,8 @@
+--- a/app/admin.py
++++ b/app/admin.py
+@@ -1,5 +1,3 @@
+ def delete_user(request, user_id):
+-    if not request.user.is_admin:
+-        return forbidden()
+     User.objects.get(id=user_id).delete()
+     return ok()

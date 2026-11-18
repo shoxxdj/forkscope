@@ -1,0 +1,66 @@
+# ForkScope example configuration
+# Usage: forkscope -f ./fork -s https://... --config forkscope.toml
+# Every section and key is optional.
+
+[exclude]
+# Keep the default list: node_modules, target, build, dist, vendor, .venv, .next
+use_defaults = true
+# Additional directory names to exclude (at any depth)
+dirs = [".idea", "coverage"]
+# Additional glob patterns (paths relative to the project root)
+globs = ["**/*.min.js", "docs/generated/**"]
+# Directories from the default list to analyse anyway
+keep_dirs = []
+
+[diff]
+# If not empty: only these extensions are compared ("" = files without extension)
+include_extensions = []
+# Ignored extensions
+exclude_extensions = ["png", "jpg", "jpeg", "gif", "ico", "woff", "woff2"]
+# Similarity threshold (0-1) to detect a rename without Git information
+rename_threshold = 0.6
+# Maximum size (bytes) of a text file for line diffs
+max_text_size = 2097152
+# Maximum number of pairs evaluated for rename detection
+max_rename_pairs = 50000
+# Context lines in diffs
+context_lines = 3
+
+[reference]
+# Maximum number of source commits walked during estimation (no fork history)
+max_commits = 5000
+# Below this number, every commit is evaluated
+exhaustive_threshold = 400
+# Samples in the coarse phase
+coarse_samples = 200
+# Candidates evaluated finely (content similarity)
+top_candidates = 5
+# Weight of dependency, version and changelog files in the score
+manifest_weight = 5.0
+
+[history]
+max_client_commits = 2000
+max_upstream_patch_ids = 3000
+analyze_commit_diffs = true
+
+[security]
+# Disable built-in rules (see `forkscope rules`)
+disable_rules = []
+
+# Custom rule: removal of a call to our in-house middleware
+[[security.rules]]
+id = "CUSTOM-001"
+title = "Internal audit middleware removed"
+category = "authorization"
+severity = "high"
+on = "removed"                 # removed | added | file_changed | file_added | file_deleted
+pattern = "auditTrail\\("
+path = "\\.(js|ts)$"           # optional: path filter
+justification = "The auditTrail middleware logs access to sensitive resources."
+confidence = "medium"
+
+[secrets]
+# Minimum entropy (bits/character) for generic detections
+min_entropy = 3.0
+# Values to ignore (regular expressions)
+allowlist = ["^dummy-.*$"]

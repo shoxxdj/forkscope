@@ -1,0 +1,6 @@
+--- /dev/null
++++ b/app/settings.py
+@@ -0,0 +1,3 @@
++DEBUG = True
++AWS_ACCESS_KEY_ID = "AKIA********** (20 car.)"
++DATABASE_URL = "postgres://admin:Sup3********** (11 car.)@db.internal:5432/acme"

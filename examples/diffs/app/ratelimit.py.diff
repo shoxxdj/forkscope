@@ -1,0 +1,8 @@
+--- /dev/null
++++ b/app/ratelimit.py
+@@ -0,0 +1,5 @@
++LIMIT = 100
++
++
++def allow(ip):
++    return hits(ip) < LIMIT
